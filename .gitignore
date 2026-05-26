@@ -14,10 +14,6 @@ dist-ssr
 .env
 .env.*
 
-# Large media — host via CDN
-*.mp4
-*.mov
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

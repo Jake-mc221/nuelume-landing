@@ -50,7 +50,7 @@ export function HeroPhone({ className = '' }: { className?: string }) {
       {videoOk ? (
         <video
           className="absolute inset-0 w-full h-full object-cover"
-          src="/nltest.mp4"
+          src="/demo.mp4"
           autoPlay
           muted
           loop
