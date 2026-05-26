@@ -6,24 +6,44 @@ import { NuelumeLogoNav } from './NuelumeLogo';
 
 export function Nav() {
   const [pastHero, setPastHero] = useState(false);
+  const [showCta, setShowCta] = useState(false);
   useEffect(() => {
     const hero = document.getElementById('top');
     if (!hero) return;
+
     const io = new IntersectionObserver(
       ([entry]) => setPastHero(!entry.isIntersecting),
       { threshold: 0 },
     );
     io.observe(hero);
-    return () => io.disconnect();
+
+    const onScroll = () => {
+      setShowCta(window.scrollY > hero.offsetHeight / 2);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => { io.disconnect(); window.removeEventListener('scroll', onScroll); };
   }, []);
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${pastHero ? 'nav-scrolled' : 'nav-base'}`}
       style={{ borderBottom: pastHero ? '1px solid rgba(22,19,15,0.06)' : '1px solid transparent' }}
     >
-      <Container className="flex items-center h-[52px] sm:h-[64px]">
+      <Container className="flex items-center justify-between h-[52px] sm:h-[64px]">
         <a href="#top" className="press flex items-center" aria-label="Nuelume, home">
           <NuelumeLogoNav />
+        </a>
+        <a
+          href="#waitlist"
+          className="press inline-flex items-center justify-center bg-berry hover:bg-berry-deep text-white text-[13px] font-medium rounded-full px-5 py-[8px]"
+          style={{
+            opacity: showCta ? 1 : 0,
+            pointerEvents: showCta ? 'auto' : 'none',
+            transition: 'opacity 300ms ease',
+          }}
+          aria-hidden={!showCta}
+        >
+          Join waitlist
         </a>
       </Container>
     </header>
