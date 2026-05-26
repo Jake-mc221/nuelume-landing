@@ -27,6 +27,13 @@ body {
   color: #8A7766;
 }
 
+/* ─── Video intro blur ──────────────────────────────────── */
+@keyframes video-unblur {
+  from { filter: blur(8px); }
+  to   { filter: blur(0px); }
+}
+.video-unblur { animation: video-unblur 250ms ease-out forwards; }
+
 /* ─── Float animation (hero device) ────────────────────── */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
@@ -116,6 +123,8 @@ body {
   background-color: rgba(250, 247, 242, 0.15);
   backdrop-filter: saturate(140%) blur(10px);
   -webkit-backdrop-filter: saturate(140%) blur(10px);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
 
 /* ─── Form ───────────────────────────────────────────────── */
