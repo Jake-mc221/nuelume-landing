@@ -5,19 +5,12 @@ import Grainient from './Grainient';
 import { NuelumeLogoNav } from './NuelumeLogo';
 
 export function Nav() {
-  const [pastHero, setPastHero] = useState(false);
   const [showCta, setShowCta] = useState(false);
   const [inWaitlist, setInWaitlist] = useState(false);
   useEffect(() => {
     const hero = document.getElementById('top');
     const waitlist = document.getElementById('waitlist');
     if (!hero) return;
-
-    const heroIo = new IntersectionObserver(
-      ([entry]) => setPastHero(!entry.isIntersecting),
-      { threshold: 0 },
-    );
-    heroIo.observe(hero);
 
     const waitlistIo = new IntersectionObserver(
       ([entry]) => setInWaitlist(entry.isIntersecting),
@@ -31,7 +24,6 @@ export function Nav() {
     window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
-      heroIo.disconnect();
       waitlistIo.disconnect();
       window.removeEventListener('scroll', onScroll);
     };
